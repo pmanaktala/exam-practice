@@ -23,7 +23,7 @@ function App() {
 
         console.log(JSON.stringify(data));
 
-        fetch("http://localhost:3001/upload", {
+        fetch("/api/upload", {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -41,7 +41,7 @@ function App() {
     const search = (event) => {
         event.preventDefault();
 
-        fetch(`http://localhost:3001/search/${searchTerm}`)
+        fetch(`api/search/${searchTerm}`)
             .then((response) => response.json())
             .then((response) => {
                 setResult(response);
@@ -50,7 +50,7 @@ function App() {
     //clear
 
     const clear = () => {
-        fetch("http://localhost:3001/delete", {
+        fetch("api/delete", {
             method: "DELETE",
         })
             .then((response) => response)
@@ -100,14 +100,12 @@ function App() {
             </form>
             {/* Search Animal contents */}
 
-            <p>
-                {result && (<p>
+                {result && (<>
                     <section>{result.name}</section>
                     <section>
                         <img src={result.url} height={200} alt="Animal Image"/>
                     </section>
-                </p>)}
-            </p>
+                </>)}
 
 
             {<button onClick={clear}>Clear Database</button> }
